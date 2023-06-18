@@ -80,48 +80,50 @@ const Home = () => {
   // for () {
   //   zeroList = // board + directions + userInputs + bombMap
   // }
-  for (let a = 1; a <= 10; a += 1) {
-    for (let y = 0; y <= 8; y++) {
-      for (let x = 0; x <= 8; x++) {
-        if (board[y][x] === 9) {
-          for (let movey = -1; movey <= 1; movey++) {
-            for (let movex = -1; movex <= 1; movex++) {
-              if (x === 0 && y === 0) {
-                userInputs[y][x] = 1;
-              } else if (
-                userInputs[y + movey] !== undefined &&
-                userInputs[x + movex] !== undefined
-              ) {
-                userInputs[y + movey][x + movex] = 1;
+  if (count_bombmap(1) >= 10) {
+    for (let a = 1; a <= 10; a += 1) {
+      for (let y = 0; y <= 8; y++) {
+        for (let x = 0; x <= 8; x++) {
+          if (board[y][x] === 9) {
+            for (let movey = -1; movey <= 1; movey++) {
+              for (let movex = -1; movex <= 1; movex++) {
+                if (x === 0 && y === 0) {
+                  userInputs[y][x] = 1;
+                } else if (
+                  userInputs[y + movey] !== undefined &&
+                  userInputs[x + movex] !== undefined
+                ) {
+                  userInputs[y + movey][x + movex] = 1;
+                }
               }
             }
           }
         }
       }
-    }
-    for (let y = 0; y <= 8; y++) {
-      for (let x = 0; x <= 8; x++) {
-        if (userInputs[y][x] === 1 && bombMap[y][x] !== 1) {
-          let numb = 0;
-          for (let movey = -1; movey <= 1; movey++) {
-            for (let movex = -1; movex <= 1; movex++) {
-              if (x === 0 && y === 0) {
-                userInputs[y][x] = 1;
-              } else if (
-                bombMap[y + movey] !== undefined &&
-                bombMap[x + movex] !== undefined &&
-                bombMap[y + movey][x + movex] === 1
-              ) {
-                numb++;
+      for (let y = 0; y <= 8; y++) {
+        for (let x = 0; x <= 8; x++) {
+          if (userInputs[y][x] === 1 && bombMap[y][x] !== 1) {
+            let numb = 0;
+            for (let movey = -1; movey <= 1; movey++) {
+              for (let movex = -1; movex <= 1; movex++) {
+                if (x === 0 && y === 0) {
+                  userInputs[y][x] = 1;
+                } else if (
+                  bombMap[y + movey] !== undefined &&
+                  bombMap[x + movex] !== undefined &&
+                  bombMap[y + movey][x + movex] === 1
+                ) {
+                  numb++;
+                }
               }
             }
+            if (numb === 0) {
+              numb = 9;
+            }
+            board[y][x] = numb;
+          } else if (userInputs[y][x] === 1 && bombMap[y][x] === 1) {
+            board[y][x] = 10;
           }
-          if (numb === 0) {
-            numb = 9;
-          }
-          board[y][x] = numb;
-        } else if (userInputs[y][x] === 1 && bombMap[y][x] === 1) {
-          board[y][x] = 10;
         }
       }
     }
