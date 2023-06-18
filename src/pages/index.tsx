@@ -87,6 +87,7 @@ const Home = () => {
           for (let movey = -1; movey <= 1; movey++) {
             for (let movex = -1; movex <= 1; movex++) {
               if (x === 0 && y === 0) {
+                userInputs[y][x] = 1;
               } else if (
                 userInputs[y + movey] !== undefined &&
                 userInputs[x + movex] !== undefined
@@ -105,6 +106,7 @@ const Home = () => {
           for (let movey = -1; movey <= 1; movey++) {
             for (let movex = -1; movex <= 1; movex++) {
               if (x === 0 && y === 0) {
+                userInputs[y][x] = 1;
               } else if (
                 bombMap[y + movey] !== undefined &&
                 bombMap[x + movex] !== undefined &&
@@ -131,17 +133,17 @@ const Home = () => {
         {board.map((row, y) =>
           row.map((color, x) => (
             <div className={styles.cell} key={`${x}-${y}`} onClick={() => clickcell(x, y)}>
-              {color === 0 && <div className={styles.nopush}></div>}
-              {color === 1 && <div className={styles.one}></div>}
-              {color === 2 && <div className={styles.two}></div>}
-              {color === 3 && <div className={styles.three}></div>}
-              {color === 4 && <div className={styles.four}></div>}
-              {color === 5 && <div className={styles.five}></div>}
-              {color === 6 && <div className={styles.six}></div>}
-              {color === 7 && <div className={styles.seven}></div>}
-              {color === 8 && <div className={styles.eight}></div>}
-              {color === 9 && <div className={styles.nothing}></div>}
-              {color === 10 && <div className={styles.bomb}></div>}
+              {color === 0 && <div className={styles.nopush} />}
+              {color === 1 && <div className={styles.one} />}
+              {color === 2 && <div className={styles.two} />}
+              {color === 3 && <div className={styles.three} />}
+              {color === 4 && <div className={styles.four} />}
+              {color === 5 && <div className={styles.five} />}
+              {color === 6 && <div className={styles.six} />}
+              {color === 7 && <div className={styles.seven} />}
+              {color === 8 && <div className={styles.eight} />}
+              {color === 9 && <div className={styles.nothing} />}
+              {color === 10 && <div className={styles.bomb} />}
             </div>
           ))
         )}
@@ -149,5 +151,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
