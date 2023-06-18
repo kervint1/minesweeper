@@ -17,13 +17,114 @@
   padding: 5rem 0;
 }
 
-.hoge {
+.one {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: 0 0;
+  display: inline-block;
+}
+
+.two {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -30px 0;
+  display: inline-block;
+}
+
+.three {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -60px 0;
+  display: inline-block;
+}
+
+.four {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -90px 0;
+  display: inline-block;
+}
+
+.five {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -120px 0;
+  display: inline-block;
+}
+
+.six {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -150px 0;
+  display: inline-block;
+}
+
+.seven {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -180px 0;
+  display: inline-block;
+}
+
+.eight {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -210px 0;
+  display: inline-block;
+}
+
+.nothing {
+  border: 2px groove;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+.bomb {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -300px 0;
+  display: inline-block;
+}
+
+.nopush {
+  width: 30px;
+  height: 30px;
+  border: 2px ridge #000;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 270px;
+  height: 270px;
+  background-color: rgb(100 100 100);
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px ridge #000;
+}
+
+/* .hoge {
   width: 30px;
   height: 30px;
   background: url('~/assets/images/icons.png');
-}
+  background-size: 125px 50px;
+  background-repeat: no-repeat;
+} */
 
-.footer {
+/* .footer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,9 +138,9 @@
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.title {
+/* .title {
   margin: 0;
   font-size: 4rem;
   line-height: 1.15;
@@ -120,4 +221,4 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
-}
+} */
