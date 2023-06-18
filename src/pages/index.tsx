@@ -58,8 +58,8 @@ const Home = () => {
   }
 
   while (Number(count_userinputs(1)) === 1 && Number(count_bombmap(1)) < 10) {
-    let decidey = getrandom(0, 9);
-    let decidex = getrandom(0, 9);
+    const decidey = getrandom(0, 8);
+    const decidex = getrandom(0, 8);
     if (userInputs[decidey][decidex] !== 1) {
       bombMap[decidey][decidex] = 1;
     }
