@@ -13,7 +13,7 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
-  const bombcount = 10;
+  // const bombcount = 10;
 
   const [bombMap, setBombMap] = useState([
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -65,7 +65,7 @@ const Home = () => {
     }
     setBombMap(bombMap);
   }
-  const isPlaying = userInputs.some((row) => row.some((input) => input !== 0));
+  // const isPlaying = userInputs.some((row) => row.some((input) => input !== 0));
   // const isFailure = userInputs.some((row, y) =>
   //   row.some((input, x) => input === 1 && bombMap[y][x] === 1)
   // );
