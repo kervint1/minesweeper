@@ -13,7 +13,7 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
-  // const bombcount = 10;
+  const bombcount = 10;
 
   const [bombMap, setBombMap] = useState([
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -26,6 +26,9 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
+
+  const resset: number[][] = [];
+  resset.push([0]);
   function getrandom(mn: number, mx: number) {
     const random = Math.floor(Math.random() * (mx + 1 - mn) + mn);
     return random;
@@ -52,6 +55,35 @@ const Home = () => {
     }
     return num;
   }
+
+  const resetclickcell = (x: number, y: number) => {
+    console.log(x, y);
+    const inputsBoard: (0 | 1 | 2 | 3)[][] = JSON.parse(JSON.stringify(userInputs));
+    const bombBoard: number[][] = JSON.parse(JSON.stringify(board));
+    if (isFailure === true || resset[0][0] === 2) {
+      for (let y = 0; y <= 8; y++) {
+        for (let x = 0; x <= 8; x++) {
+          inputsBoard[y][x] = 0;
+          bombBoard[y][x] = 0;
+        }
+      }
+      setUserInputs(inputsBoard);
+      setBombMap(bombBoard);
+    }
+  };
+  const onclickcell = (x: number, y: number) => {
+    console.log(x, y);
+    const newBoard: (0 | 1 | 2 | 3)[][] = JSON.parse(JSON.stringify(userInputs));
+    if (userInputs[y][x] === 0) {
+      newBoard[y][x] = 2;
+    } else if (userInputs[y][x] === 2) {
+      newBoard[y][x] = 3;
+    } else if (userInputs[y][x] === 3) {
+      newBoard[y][x] = 0;
+    }
+    setUserInputs(newBoard);
+  };
+
   const board: number[][] = [];
   for (let a = 1; a <= 9; a++) {
     board.push([0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -66,20 +98,36 @@ const Home = () => {
     setBombMap(bombMap);
   }
   // const isPlaying = userInputs.some((row) => row.some((input) => input !== 0));
-  // const isFailure = userInputs.some((row, y) =>
-  //   row.some((input, x) => input === 1 && bombMap[y][x] === 1)
-  // );
+  const isFailure = userInputs.some((row, y) =>
+    row.some((input, x) => input === 1 && bombMap[y][x] === 1)
+  );
 
   const clickcell = (x: number, y: number) => {
     console.log(x, y);
     const newBoard: (0 | 1 | 2 | 3)[][] = JSON.parse(JSON.stringify(userInputs));
-    newBoard[y][x] = 1;
+    if (userInputs[y][x] === 0 && isFailure !== true) {
+      newBoard[y][x] = 1;
+    }
     setUserInputs(newBoard);
   };
   // let zeroList: { x: number; y: number }[] = [];
   // for () {
   //   zeroList = // board + directions + userInputs + bombMap
   // }
+  if (isFailure === true) {
+    resset[0][0] = 1;
+  } else if (count_userinputs(0) + count_userinputs(2) + count_userinputs(3) === bombcount) {
+    resset[0][0] = 2;
+  }
+  for (let y = 0; y <= 8; y++) {
+    for (let x = 0; x <= 8; x++) {
+      if (userInputs[y][x] === 2) {
+        board[y][x] = 11;
+      } else if (userInputs[y][x] === 3) {
+        board[y][x] = 12;
+      }
+    }
+  }
   if (count_bombmap(1) >= 10) {
     for (let a = 1; a <= 10; a += 1) {
       for (let y = 0; y <= 8; y++) {
@@ -131,24 +179,44 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.board}>
-        {board.map((row, y) =>
-          row.map((color, x) => (
-            <div className={styles.cell} key={`${x}-${y}`} onClick={() => clickcell(x, y)}>
-              {color === 0 && <div className={styles.nopush} />}
-              {color === 1 && <div className={styles.one} />}
-              {color === 2 && <div className={styles.two} />}
-              {color === 3 && <div className={styles.three} />}
-              {color === 4 && <div className={styles.four} />}
-              {color === 5 && <div className={styles.five} />}
-              {color === 6 && <div className={styles.six} />}
-              {color === 7 && <div className={styles.seven} />}
-              {color === 8 && <div className={styles.eight} />}
-              {color === 9 && <div className={styles.nothing} />}
-              {color === 10 && <div className={styles.bomb} />}
-            </div>
-          ))
-        )}
+      <div className={styles.plate}>
+        <div className={styles.reset}>
+          {resset.map((row, y) =>
+            row.map((color, x) => (
+              <div className={styles.reset} key={`${x}-${y}`} onClick={() => resetclickcell(x, y)}>
+                {color === 0 && <div className={styles.smile} />}
+                {color === 1 && <div className={styles.dead} />}
+                {color === 2 && <div className={styles.cool} />}
+              </div>
+            ))
+          )}
+        </div>
+        <div className={styles.board}>
+          {board.map((row, y) =>
+            row.map((color, x) => (
+              <div
+                className={styles.cell}
+                key={`${x}-${y}`}
+                onClick={() => clickcell(x, y)}
+                onContextMenu={() => onclickcell(x, y)}
+              >
+                {color === 0 && <div className={styles.nopush} />}
+                {color === 1 && <div className={styles.one} />}
+                {color === 2 && <div className={styles.two} />}
+                {color === 3 && <div className={styles.three} />}
+                {color === 4 && <div className={styles.four} />}
+                {color === 5 && <div className={styles.five} />}
+                {color === 6 && <div className={styles.six} />}
+                {color === 7 && <div className={styles.seven} />}
+                {color === 8 && <div className={styles.eight} />}
+                {color === 9 && <div className={styles.nothing} />}
+                {color === 10 && <div className={styles.bomb} />}
+                {color === 11 && <div className={styles.flag} />}
+                {color === 12 && <div className={styles.question} />}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

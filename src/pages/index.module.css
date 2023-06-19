@@ -101,6 +101,54 @@
   border: 3px ridge #fff;
 }
 
+.flag {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -270px 0;
+  display: inline-block;
+}
+
+.question {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -240px 0;
+  display: inline-block;
+}
+
+.smile {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -330px 0;
+  display: inline-block;
+}
+
+.cool {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -360px 0;
+  display: inline-block;
+}
+
+.dead {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -390px 0;
+  display: inline-block;
+}
+
+.plate {
+  display: flex;
+  flex-wrap: wrap;
+  width: 310px;
+  height: 370px;
+  background-color: #aaa;
+}
+
 .board {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +161,12 @@
   width: 30px;
   height: 30px;
   border: 2px ridge #000;
+}
+
+.reset {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #000;
 }
 
 /* .hoge {
