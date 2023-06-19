@@ -82,7 +82,6 @@
 }
 
 .nothing {
-  border: 2px groove;
   width: 30px;
   height: 30px;
   display: inline-block;
@@ -99,7 +98,7 @@
 .nopush {
   width: 30px;
   height: 30px;
-  border: 2px ridge #000;
+  border: 3px ridge #fff;
 }
 
 .board {
@@ -107,13 +106,13 @@
   flex-wrap: wrap;
   width: 270px;
   height: 270px;
-  background-color: rgb(100 100 100);
+  background-color: #aaa;
 }
 
 .cell {
   width: 30px;
   height: 30px;
-  border: 1px ridge #000;
+  border: 2px ridge #000;
 }
 
 /* .hoge {
