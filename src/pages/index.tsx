@@ -154,7 +154,6 @@ const Home = () => {
     row.some((input, x) => input === 1 && bombMap[y][x] === 1)
   );
   //クリック時
-  let numclear = 0;
   const clickcell = (x: number, y: number) => {
     console.log(x, y);
     const newUserInputs: (0 | 1 | 2 | 3)[][] = JSON.parse(JSON.stringify(userInputs));
