@@ -100,6 +100,12 @@ const Home = () => {
     }
     setBombMap(bombMap);
   }
+
+  // const isPlaying = userInputs.some((row) => row.some((input) => input !== 0));
+  const isFailure = userInputs.some((row, y) =>
+    row.some((input, x) => input === 1 && bombMap[y][x] === 1)
+  );
+
   //boardを設定
   if (count_bombmap(1) >= 10) {
     for (let a = 1; a <= 10; a += 1) {
@@ -118,6 +124,9 @@ const Home = () => {
                 }
               }
             }
+          }
+          if (isFailure === true && bombMap[y][x] === 1 && userInputs[y][x] === 0) {
+            board[y][x] = 13;
           }
         }
       }
@@ -149,10 +158,7 @@ const Home = () => {
       }
     }
   }
-  // const isPlaying = userInputs.some((row) => row.some((input) => input !== 0));
-  const isFailure = userInputs.some((row, y) =>
-    row.some((input, x) => input === 1 && bombMap[y][x] === 1)
-  );
+
   //クリック時
   const clickcell = (x: number, y: number) => {
     console.log(x, y);
@@ -207,7 +213,7 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.plate}>
+      <div className={styles.plateup}>
         <div className={styles.reset}>
           {reset.map((row, y) =>
             row.map((color, x) => (
@@ -219,31 +225,36 @@ const Home = () => {
             ))
           )}
         </div>
-        <div className={styles.board}>
-          {board.map((row, y) =>
-            row.map((color, x) => (
-              <div
-                className={styles.cell}
-                key={`${x}-${y}`}
-                onClick={() => clickcell(x, y)}
-                onContextMenu={() => onclickcell(x, y)}
-              >
-                {color === 0 && <div className={styles.nopush} />}
-                {color === 1 && <div className={styles.one} />}
-                {color === 2 && <div className={styles.two} />}
-                {color === 3 && <div className={styles.three} />}
-                {color === 4 && <div className={styles.four} />}
-                {color === 5 && <div className={styles.five} />}
-                {color === 6 && <div className={styles.six} />}
-                {color === 7 && <div className={styles.seven} />}
-                {color === 8 && <div className={styles.eight} />}
-                {color === 9 && <div className={styles.nothing} />}
-                {color === 10 && <div className={styles.bomb} />}
-                {color === 11 && <div className={styles.flag} />}
-                {color === 12 && <div className={styles.question} />}
-              </div>
-            ))
-          )}
+      </div>
+      <div className={styles.plate2}>
+        <div className={styles.plate}>
+          <div className={styles.board}>
+            {board.map((row, y) =>
+              row.map((color, x) => (
+                <div
+                  className={styles.cell}
+                  key={`${x}-${y}`}
+                  onClick={() => clickcell(x, y)}
+                  onContextMenu={() => onclickcell(x, y)}
+                >
+                  {color === 0 && <div className={styles.nopush} />}
+                  {color === 1 && <div className={styles.one} />}
+                  {color === 2 && <div className={styles.two} />}
+                  {color === 3 && <div className={styles.three} />}
+                  {color === 4 && <div className={styles.four} />}
+                  {color === 5 && <div className={styles.five} />}
+                  {color === 6 && <div className={styles.six} />}
+                  {color === 7 && <div className={styles.seven} />}
+                  {color === 8 && <div className={styles.eight} />}
+                  {color === 9 && <div className={styles.nothing} />}
+                  {color === 10 && <div className={styles.redbomb} />}
+                  {color === 13 && <div className={styles.bomb} />}
+                  {color === 11 && <div className={styles.flag} />}
+                  {color === 12 && <div className={styles.question} />}
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

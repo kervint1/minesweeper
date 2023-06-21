@@ -87,6 +87,15 @@
   display: inline-block;
 }
 
+.redbomb {
+  background: url('../../assets/images/icons.png');
+  width: 30px;
+  height: 30px;
+  background-position: -300px 0;
+  display: inline-block;
+  background-color: red;
+}
+
 .bomb {
   background: url('../../assets/images/icons.png');
   width: 30px;
@@ -98,7 +107,10 @@
 .nopush {
   width: 30px;
   height: 30px;
-  border: 3px ridge #fff;
+  border-left: 3px ridge #fff;
+  border-top: 3px ridge #fff;
+  border-right: 3px (199, 199, 199) #fff;
+  border-bottom: 3px (199, 199, 199) #fff;
 }
 
 .flag {
@@ -118,11 +130,13 @@
 }
 
 .smile {
+  border: 1px ridge black;
   background: url('../../assets/images/icons.png');
   width: 30px;
   height: 30px;
   background-position: -330px 0;
   display: inline-block;
+  box-shadow: 0 2px 0 gray;
 }
 
 .cool {
@@ -131,6 +145,8 @@
   height: 30px;
   background-position: -360px 0;
   display: inline-block;
+  box-shadow: 0 2px 0 gray;
+  border: 1px ridge black;
 }
 
 .dead {
@@ -139,14 +155,34 @@
   height: 30px;
   background-position: -390px 0;
   display: inline-block;
+  box-shadow: 0 2px 0 gray;
+  border: 1px ridge black;
 }
 
 .plate {
   display: flex;
   flex-wrap: wrap;
-  width: 310px;
-  height: 370px;
+  width: 288px;
+  height: 288px;
   background-color: #aaa;
+  text-align: center;
+  border-right: 9px ridge rgb(230 230 230);
+  border-bottom: 9px ridge rgb(230 230 230);
+  border-left: 9px ridge black;
+  border-top: 9px ridge black;
+  margin-left: 8px;
+}
+
+.plate2 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 305px;
+  height: 315px;
+  background-color: #aaa;
+  text-align: center;
+  border-left: 5px outset rgb(230 230 230);
+  border-right: 5px outset rgb(184 180 180);
+  border-bottom: 5px outset rgb(184 180 180);
 }
 
 .board {
@@ -163,10 +199,41 @@
   border: 2px ridge #000;
 }
 
+.nopush:hover {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
 .reset {
+  margin-left: 70px;
+  margin-top: 18px;
+  position: center;
   width: 30px;
   height: 30px;
-  border: 2px solid #000;
+}
+
+.smile:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.dead:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+.cool:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.plateup {
+  width: 305px;
+  height: 60px;
+  background-color: #aaa;
+  border-left: 5px outset rgb(230 230 230);
+  border-top: 5px outset rgb(230 230 230);
+  border-right: 5px outset rgb(184 180 180);
 }
 
 /* .hoge {
