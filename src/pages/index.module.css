@@ -205,8 +205,7 @@
 }
 
 .reset {
-  margin-left: 70px;
-  margin-top: 18px;
+  margin-top: 3%;
   position: center;
   width: 30px;
   height: 30px;
@@ -228,12 +227,31 @@
 }
 
 .plateup {
+  display: flex;
+  justify-content: space-between;
   width: 305px;
   height: 60px;
   background-color: #aaa;
   border-left: 5px outset rgb(230 230 230);
   border-top: 5px outset rgb(230 230 230);
   border-right: 5px outset rgb(184 180 180);
+}
+
+.timer {
+  width: 60px;
+  height: 50px;
+  background-color: #000;
+  color: red;
+  font-size: 2em; /* 文字サイズを調整 */
+  font-weight: bold; /* 文字の太さを調整 */
+  text-align: center; /* テキストを中央揃え */
+  margin-top: 10px; /* 上部に少し余白を追加 */
+}
+
+.bombcount {
+  width: 60px;
+  height: 50px;
+  background-color: #000;
 }
 
 /* .hoge {

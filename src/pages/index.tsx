@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.css';
 
 const Home = () => {
@@ -26,9 +26,20 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
+
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
   //リセットセル
   const reset: number[][] = [];
   reset.push([0]);
+
+  useEffect(() => {
+    if (isTimerRunning) {
+      const timerId = setInterval(() => setTimer((prev) => prev + 1), 1000);
+      return () => clearInterval(timerId);
+    }
+  }, [isTimerRunning]);
+
   function getrandom(mn: number, mx: number) {
     const random = Math.floor(Math.random() * (mx + 1 - mn) + mn);
     return random;
@@ -70,6 +81,8 @@ const Home = () => {
     }
     setUserInputs(inputsBoard);
     setBombMap(bombBoard);
+    setTimer(0); // タイマーをリセット
+    setIsTimerRunning(false); // タイマーを止める
   };
   //右クリック
   const onclickcell = (x: number, y: number) => {
@@ -106,25 +119,54 @@ const Home = () => {
     row.some((input, x) => input === 1 && bombMap[y][x] === 1)
   );
 
+  useEffect(() => {
+    if (isFailure) {
+      setIsTimerRunning(false); // ゲームが失敗したらタイマーを止める
+    }
+  }, [isFailure]);
+
   //boardを設定
   if (count_bombmap(1) >= 10) {
     for (let a = 1; a <= 10; a += 1) {
       for (let y = 0; y <= 8; y++) {
         for (let x = 0; x <= 8; x++) {
-          if (board[y][x] === 9) {
-            for (let movey = -1; movey <= 1; movey++) {
-              for (let movex = -1; movex <= 1; movex++) {
-                if (x === 0 && y === 0) {
-                  userInputs[y][x] = 1;
-                } else if (
-                  userInputs[y + movey] !== undefined &&
-                  userInputs[x + movex] !== undefined
-                ) {
-                  userInputs[y + movey][x + movex] = 1;
+          const chain = (y: number, x: number) => {
+            let Bomb_num = 0;
+            if (board[y][x] === 9) {
+              for (let a = -1; a <= 1; a++) {
+                for (let b = -1; b <= 1; b++) {
+                  for (let c = -1; c <= 1; c++) {
+                    for (let d = -1; d <= 1; d++) {
+                      if (
+                        bombMap[y + a + c] !== undefined &&
+                        bombMap[x + b + d] !== undefined &&
+                        bombMap[y + a + c][x + b + d] === 1
+                      ) {
+                        Bomb_num++;
+                      }
+                    }
+                  }
+                  if (
+                    bombMap[y + a] !== undefined &&
+                    bombMap[x + b] !== undefined &&
+                    Bomb_num === 0 &&
+                    board[y + a][x + b] === 0
+                  ) {
+                    board[y + a][x + b] = 9;
+                    chain(y + a, x + b);
+                  } else if (
+                    bombMap[y + a] !== undefined &&
+                    bombMap[x + b] !== undefined &&
+                    Bomb_num > 0
+                  ) {
+                    board[y + a][x + b] = Bomb_num;
+                    Bomb_num = 0;
+                  }
                 }
               }
             }
-          }
+          };
+          chain(y, x);
           if (isFailure === true && bombMap[y][x] === 1 && userInputs[y][x] === 0) {
             board[y][x] = 13;
           }
@@ -167,6 +209,9 @@ const Home = () => {
 
     if (userInputs[y][x] === 0 && !isFailure) {
       newUserInputs[y][x] = 1;
+      if (!isTimerRunning) {
+        setIsTimerRunning(true); // 最初のクリックでタイマーを開始
+      }
     }
     //数字クリック時周り開く
     else if (
@@ -214,6 +259,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div className={styles.plateup}>
+        <div className={styles.bombcount} />
         <div className={styles.reset}>
           {reset.map((row, y) =>
             row.map((color, x) => (
@@ -225,6 +271,7 @@ const Home = () => {
             ))
           )}
         </div>
+        <div className={styles.timer}>{timer}</div>
       </div>
       <div className={styles.plate2}>
         <div className={styles.plate}>
